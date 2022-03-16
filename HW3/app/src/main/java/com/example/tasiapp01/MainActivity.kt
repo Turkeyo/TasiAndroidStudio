@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity() {
         //設定變數
         val ed_name = findViewById<EditText>(R.id.ed_name)
         val tx_view = findViewById<TextView>(R.id.tx_view)
-        val radioGroup = findViewById<RadioGroup>(R.id.rg)
         val rb_s = findViewById<RadioButton>(R.id.rb_s)
         val rb_r = findViewById<RadioButton>(R.id.rb_r)
         val rb_p = findViewById<RadioButton>(R.id.rb_p)
