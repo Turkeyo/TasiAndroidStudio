@@ -13,19 +13,15 @@ class MainActivity2 : AppCompatActivity() {
         val a2_go =  findViewById<Button>(R.id.a2_go)
         val a2_suger_group = findViewById<RadioGroup>(R.id.a2_suger_group)
         val a2_ice_group = findViewById<RadioGroup>(R.id.a2_ice_group)
-        val a2_drinkname = findViewById<EditText>(R.id.a2_drinkname)
+        val a2_drinkname = findViewById<RadioGroup>(R.id.a2_drink_group)
         intent?.extras.let {
             val bundle = Bundle()
             a2_go.setOnClickListener{
-                if(a2_drinkname.length() <1)
-                    Toast.makeText(this,"請輸入飲料名稱",Toast.LENGTH_SHORT).show()
-                else {
                     bundle.putString("suger", a2_suger_group.findViewById<RadioButton>(a2_suger_group.checkedRadioButtonId).text.toString())
                     bundle.putString("ice", a2_ice_group.findViewById<RadioButton>(a2_ice_group.checkedRadioButtonId).text.toString())
-                    bundle.putString("drinkname", a2_drinkname.text.toString())
-                    setResult(Activity.RESULT_OK, Intent().putExtras(bundle))
+                    bundle.putString("drinkname", a2_drinkname.findViewById<RadioButton>(a2_drinkname.checkedRadioButtonId).text.toString())
+                    setResult(RESULT_OK, Intent().putExtras(bundle))
                     finish()
-                }
             }
         }
     }
