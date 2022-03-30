@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="預設TOAST"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="自定義TOAST"
+        app:layout_constraintTop_toBottomOf="@+id/btn"
+        app:layout_constraintStart_toStartOf="@+id/btn"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="按鍵式ALERTDIALOG"
+        app:layout_constraintTop_toBottomOf="@+id/btn2"
+        app:layout_constraintStart_toStartOf="@+id/btn2"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="列表式ALERTDIALOG"
+        app:layout_constraintTop_toBottomOf="@+id/btn3"
+        app:layout_constraintStart_toStartOf="@+id/btn3"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="單選式ALERTDIALOG"
+        app:layout_constraintTop_toBottomOf="@+id/btn4"
+        app:layout_constraintStart_toStartOf="@+id/btn4"
+        android:layout_marginTop="20dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
