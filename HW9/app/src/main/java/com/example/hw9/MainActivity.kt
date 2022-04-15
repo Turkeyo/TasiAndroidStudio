@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.provider.Settings
 import android.view.View
 import android.widget.*
 import kotlin.math.pow
@@ -18,10 +17,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btn_start: Button
     private lateinit var ed_height: EditText
     private lateinit var ed_weight: EditText
-    private lateinit var ed_age: EditText
     private lateinit var tv_weight: TextView
     private lateinit var tv_fat: TextView
-    private lateinit var tv_bmi: TextView
     private lateinit var tv_progress: TextView
     private lateinit var progressBar2: ProgressBar
     private lateinit var ll_progress: LinearLayout
@@ -32,17 +29,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //將變數與 XML 元件綁定
-        btn_start = findViewById(R.id.btn_calculate)
-        ed_height = findViewById(R.id.ed_height)
-        ed_weight = findViewById(R.id.ed_weight)
-        ed_age = findViewById(R.id.ed_age)
-        tv_weight = findViewById(R.id.tv_weight)
-        tv_fat = findViewById(R.id.tv_fat)
-        tv_bmi = findViewById(R.id.tv_bmi)
-        tv_progress = findViewById(R.id.tv_progress)
-        progressBar2 = findViewById(R.id.progressBar2)
-        ll_progress = findViewById(R.id.ll_progress)
-        btn_boy = findViewById(R.id.btn_boy)
+        btn_start = findViewById(R.id.btn_calculate)  //計算按鈕
+        ed_height = findViewById(R.id.ed_height)  //輸入的身高
+        ed_weight = findViewById(R.id.ed_weight)  //輸入的體重
+        tv_weight = findViewById(R.id.tv_weight)  //顯示標準重量
+        tv_fat = findViewById(R.id.tv_fat)  //顯示體脂肪
+        tv_progress = findViewById(R.id.tv_progress)  //顯示%數
+        progressBar2 = findViewById(R.id.progressBar2) //顯示進度橫條
+        ll_progress = findViewById(R.id.ll_progress)  //用於顯示元件
+        btn_boy = findViewById(R.id.btn_boy)  //性別選取
 
         //按下按鈕的監聽器
         btn_start.setOnClickListener {
@@ -50,8 +45,7 @@ class MainActivity : AppCompatActivity() {
             when {
                 ed_height.length() < 1 -> msg.what = 1 //如果沒有輸入身高
                 ed_weight.length() < 1 -> msg.what = 2 //如果沒有輸入體重
-                ed_age.length() < 1    -> msg.what = 3 //如果沒有輸入年齡
-                else->{ll_progress.visibility = View.VISIBLE //如果輸入資料完整則先顯示進度條後執行runprogressBar()方法
+                else->{//如果輸入資料完整則執行runprogressBar()方法
                     runprogressBar()}
             }
             handler.sendMessage(msg)
@@ -67,24 +61,23 @@ class MainActivity : AppCompatActivity() {
             showToast("請輸入身高")
         if (msg.what == 2)
             showToast("請輸入體重")
-        if (msg.what == 3)
-            showToast("請輸入年齡")
         if (msg.what == 4) {
             ll_progress.visibility = View.GONE //隱藏顯示條(因為已經載入完成)
             val height = ed_height.text.toString().toDouble() //設定身高變數讀取身高
             val weight = ed_weight.text.toString().toDouble() //設定體重變數讀取體重
-            val age = ed_age.text.toString().toDouble() //設定年齡變數讀取年齡
-            val bmi = weight / ((height / 100).pow(2)) //BMI計算
+            val stand_weight: Double
+            val stand_bodyfat: Double
             //判斷男女體脂率並分別計算
-            val (stand_weight, body_fat) = if (btn_boy.isChecked) {
-                Pair((height - 80) * 0.7, 1.39 * bmi + 0.16 * age - 19.34)
+            if (btn_boy.isChecked) {
+                stand_weight = (height - 80)* 0.7
+                stand_bodyfat = (weight - 0.88 * stand_weight) / weight * 100
             } else {
-                Pair((height - 70) * 0.6, 1.39 * bmi + 0.16 * age - 9)
+                stand_weight = (height - 70)* 0.6
+                stand_bodyfat = (weight - 0.82 * stand_weight) / weight * 100
             }
             //設定輸出
             tv_weight.text = "標準體重 \n${String.format("%.2f", stand_weight)}"
-            tv_fat.text = "體脂肪 \n${String.format("%.2f", body_fat)}"
-            tv_bmi.text = "BMI \n${String.format("%.2f", bmi)}"
+            tv_fat.text = "體脂肪 \n${String.format("%.2f", stand_bodyfat)}"
         }
         if (msg.what == 5){
             //執行進度更新
@@ -95,10 +88,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun runprogressBar() {
+        ll_progress.visibility = View.VISIBLE
         Thread {
-            //初始化橫向進度條及顯示%數
+            //初始化橫向進度條、顯示%數、進度
             progressBar2.progress = 0
             tv_progress.text = "0%"
+            progressBar2sp = 0
             //建立迴圈執行一百次共延長五秒
             while (progressBar2sp < 100) {
                 //休息50毫秒
