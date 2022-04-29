@@ -30,6 +30,11 @@ class MainActivity2 : AppCompatActivity(), DatePickerDialog.OnDateSetListener, T
         //設定取得時間的方法
         pickDate()
         //設定返回按鈕
+        val showusername = findViewById<TextView>(R.id.textView2)
+        intent?.extras?.let {
+            val uname =  it.getString("username")
+            showusername.text = uname
+        }
         val BtnBack = findViewById<Button>(R.id.BtnBack)
         val bundle = Bundle()
         BtnBack.setOnClickListener{
