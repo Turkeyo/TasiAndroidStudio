@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                     btn_query.isEnabled = true
                     //建立 AlertDialog 物件並顯示字串陣列
                     AlertDialog.Builder(this@MainActivity)
-                        .setTitle("臺北市空氣品質")
+                        .setTitle("ID Name")
                         .setItems(items, null)
                         .show()
                 }
