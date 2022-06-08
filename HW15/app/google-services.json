@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "461313351389",
+    "project_id": "hw15-2dfbf",
+    "storage_bucket": "hw15-2dfbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461313351389:android:464cc09d97861d9b7dc534",
+        "android_client_info": {
+          "package_name": "com.example.hw15"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "461313351389-6go4fdmpl50tdq0saf3firq81a9vidn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyHHYSkYfnjNgKvmWfqfBNNciBsARMFhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "461313351389-6go4fdmpl50tdq0saf3firq81a9vidn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
